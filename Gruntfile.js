@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
         jslint: {
             files: [
-                'generator/meta.json'
+                'meta.json'
             ],
             options: {
                 failOnError: true
@@ -26,35 +26,8 @@ module.exports = function (grunt) {
     grunt.registerTask('test', 'jslint');
 
     grunt.registerTask('meta_json_pretty_print', function() {
-        var metadata = grunt.file.readJSON('generator/meta.json') ;
-        grunt.file.write('generator/meta.json',JSON.stringify(metadata, null, 4));
-    });
-
-    grunt.registerTask('generer_depot_grain', function(dest) {
-        var done = this.async();
-        if (arguments.length === 0) {
-            grunt.log.writeln("Il faut passer le nom du répertoire de destination à la tâche.");
-            grunt.log.writeln("grunt generer_depot_grain:NOM_GRAIN");
-            done(false);
-        }
-        var rsync = require("rsyncwrapper").rsync;
-        rsync({
-                src: "./generator/",
-                dest: "../" + dest,
-                recursive: true
-              },
-              function (error,stdout,stderr,cmd) {
-                if ( error ) {
-                    // failed
-                    grunt.log.writeln(error.message);
-                    done(false);
-                } else {
-                    grunt.log.writeln("Fichiers de base copiés dans ../" + dest);
-                    // success
-                    done(true);
-                }
-               }
-             ) ;
-    }) ;
+        var metadata = grunt.file.readJSON('meta.json') ;
+        grunt.file.write('meta.json',JSON.stringify(metadata, null, 4));
+    })
 
 };
