@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Auteur: X. Caruso -->
+<graph width="700" height="600" node-radius="5" start="lyon" end="puits" gauge-width="9">
+
+<node id="paris" x="400" y="165"/>
+<node id="strasbourg" x="655" y="190"/>
+<node id="brest" x="52" y="193"/>
+<node id="nantes" x="192" y="285"/>
+<node id="lille" x="437" y="20"/>
+<node id="bordeaux" x="252" y="452"/>
+<node id="lyon" x="521" y="389"/>
+<node id="marseille" x="550" y="567"/>
+<node id="toulouse" x="346" y="543"/>
+<node id="nice" x="651" y="530"/>
+<node id="dijon" x="535" y="270"/>
+<node id="bourges" x="399" y="291"/>
+<node id="puits" x="52" y="543" />
+
+<edge id="puits1" s="toulouse" t="puits" c="100" />
+<edge id="puits2" s="brest" t="puits" c="100" />
+
+<edge s="paris" t="lyon" c="50" rev="50" />
+<edge s="paris" t="strasbourg" c="50" rev="50" />
+<edge s="paris" t="brest" c="30" rev="30" />
+<edge s="paris" t="nantes" c="40" rev="40" />
+<edge s="paris" t="lille" c="50" rev="50" />
+<edge s="paris" t="dijon" c="20" rev="20" />
+<edge s="paris" t="bourges" c="10" rev="10" />
+
+<edge s="lyon" t="marseille" c="50" rev="50" />
+<edge s="lyon" t="dijon" c="20" rev="20" />
+<edge s="lyon" t="bourges" c="20" rev="20" />
+<edge s="lyon" t="strasbourg" c="30" rev="30" />
+<edge s="lyon" t="bordeaux" c="20" rev="20" />
+
+<edge s="nantes" t="bourges" c="10" rev="10" />
+<edge s="nantes" t="brest" c="35" rev="35" />
+<edge s="nantes" t="bordeaux" c="35" rev="35" />
+
+<edge s="toulouse" t="bordeaux" c="25" rev="25" />
+<edge s="toulouse" t="marseille" c="20" rev="20" />
+<edge s="nice" t="marseille" c="20" rev="20" />
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg:image width="100%" height="100%" preserveAspectRatio="none" xlink:href="villes/france.jpg"/>
+</svg>
+
+<stylesheet>
+  @namespace svg "http://www.w3.org/2000/svg";
+
+  svg|*.node {
+    fill: red;
+  }
+
+  svg|*.edge.capa-positive > svg|*.arrow-end,
+  svg|*.edge.capa-negative > svg|*.arrow-end,
+  svg|*.edge.capa-positive > svg|*.arrow-start,
+  svg|*.edge.capa-negative > svg|*.arrow-start {
+    fill: none;
+  }
+
+  svg|*.edge > svg|*.gauge-bg {
+    fill: rgb(200,200,100);
+  }
+
+  svg|*#g-puits {
+    fill: rgb(128,0,128);
+  }
+  svg|*#g-puits1:not(.state-active) > svg|*.line-start,
+  svg|*#g-puits1:not(.state-active) > svg|*.line-end,
+  svg|*#g-puits1:not(.state-active) > svg|*.gauge-rect,
+  svg|*#g-puits2:not(.state-active) > svg|*.line-start,
+  svg|*#g-puits2:not(.state-active) > svg|*.line-end,
+  svg|*#g-puits2:not(.state-active) > svg|*.gauge-rect {
+    stroke: rgb(64,0,64);
+    stroke-width: 2px;
+  }
+
+  svg|*#g-puits1:not(.state-active) > svg|*.gauge,
+  svg|*#g-puits1:not(.state-active) > svg|*.gauge-adj,
+  svg|*#g-puits2:not(.state-active) > svg|*.gauge,
+  svg|*#g-puits2:not(.state-active) > svg|*.gauge-adj {
+    stroke-width: 2px;
+  }
+
+  svg|*#g-puits1:not(.state-active) > svg|*.arrow-end,
+  svg|*#g-puits2:not(.state-active) > svg|*.arrow-end {
+    fill: rgb(64,0,64);
+  }
+
+  svg|*.edge > svg|*.gauge {
+    fill: rgb(50,50,150);
+  }
+
+  svg|*.edge.state-active {
+    stroke: black;
+    stroke-width: 3px;
+  }
+
+  svg|*.edge.state-active.adj-positive > svg|*.arrow-end,
+  svg|*.edge.state-active.adj-negative > svg|*.arrow-start {
+    stroke: black;
+    stroke-width: 2px;
+    fill: black;
+  }
+
+  svg|*.edge.adj-positive:not(.used-negative) > svg|*.gauge-adj,
+  svg|*.edge.adj-negative:not(.used-positive) > svg|*.gauge-adj {
+    fill: rgb(0,150,0);
+  }
+      
+  svg|*.edge.adj-negative.used-positive > svg|*.gauge-adj,
+  svg|*.edge.adj-positive.used-negative > svg|*.gauge-adj {
+    fill: rgb(150,0,0);
+  }
+</stylesheet>
+
+</graph>

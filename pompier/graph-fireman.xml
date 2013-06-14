@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Auteur: X. Caruso -->
+<graph width="800" height="600" node-radius="75" start="lac" end="maison" gauge-width="10">
+
+<node id="lac" x="91" y="502"/>
+<node id="epuration" x="105" y="110"/>
+<node id="caserne" x="362" y="246"/>
+<node id="borne" x="606" y="89"/>
+<node id="camion" x="469" y="520"/>
+<node id="maison" x="713" y="342"/>
+
+<edge s="lac" t="caserne" c="30"/>
+<edge s="epuration" t="caserne" c="20"/>
+<edge s="epuration" t="borne" c="20"/>
+<edge s="caserne" t="borne" c="20"/>
+<edge s="caserne" t="camion" c="40"/>
+<edge s="camion" t="maison" c="50"/>
+<edge s="camion" t="borne" c="50"/>
+<edge s="borne" t="maison" c="20"/>
+<edge s="lac" t="epuration" c="50"/>
+
+<stylesheet>
+  @namespace svg "http://www.w3.org/2000/svg";
+
+  svg|*#g-lac {
+    fill: url(#im-lac);
+  }
+  svg|*#g-epuration {
+    fill: url(#im-epuration);
+  }
+  svg|*#g-caserne {
+    fill: url(#im-caserne);
+  }
+  svg|*#g-borne {
+    fill: url(#im-borne);
+  }
+  svg|*#g-camion {
+    fill: url(#im-camion);
+  }
+  svg|*#g-maison {
+    fill: url(#im-maison);
+  }
+
+  svg|*#g-lac.state-reachable {
+    fill: url(#im-lac-reachable);
+  }
+  svg|*#g-epuration.state-reachable {
+    fill: url(#im-epuration-reachable);
+  }
+  svg|*#g-caserne.state-reachable {
+    fill: url(#im-caserne-reachable);
+  }
+  svg|*#g-borne.state-reachable {
+    fill: url(#im-borne-reachable);
+  }
+  svg|*#g-camion.state-reachable {
+    fill: url(#im-camion-reachable);
+  }
+  svg|*#g-maison.state-reachable {
+    fill: url(#im-maison-reachable);
+  }
+
+  svg|*.gauge {
+    fill: rgb(64,128,255);
+    stroke: none;
+  }
+
+  svg|*.edge.state-active {
+    stroke: black;
+    stroke-width: 3px;
+  }
+
+  svg|*.edge.state-active.adj-positive > svg|*.arrow-end {
+    stroke: black;
+    stroke-width: 2px;
+    fill: black;
+  }
+
+  svg|*.edge.state-active.adj-negative {
+    stroke: rgb(128,0,0);
+    stroke-width: 3px;
+  }
+
+  svg|*.edge.state-active.adj-negative > svg|*.arrow-start {
+    stroke: rgb(128,0,0);
+    stroke-width: 2px;
+    fill: rgb(128,0,0);
+  }
+
+  svg|*.edge.adj-positive:not(.used-negative) > svg|*.gauge-adj,
+  svg|*.edge.adj-negative:not(.used-positive) > svg|*.gauge-adj {
+    fill: rgb(64,255,64);
+  }
+
+  svg|*.edge.adj-negative.used-positive > svg|*.gauge-adj,
+  svg|*.edge.adj-positive.used-negative > svg|*.gauge-adj {
+    fill: rgb(255,64,64);
+  }
+</stylesheet>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg:pattern id="im-lac" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:image xlink:href="pompier/lac.png" width="1" height="1" />
+    </svg:pattern>
+    <svg:pattern id="im-epuration" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:image xlink:href="pompier/epuration.png" width="1" height="1" />
+    </svg:pattern>
+    <svg:pattern id="im-caserne" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:image xlink:href="pompier/caserne.png" width="1" height="1" />
+    </svg:pattern>
+    <svg:pattern id="im-borne" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:image xlink:href="pompier/borne.png" width="1" height="1" />
+    </svg:pattern>
+    <svg:pattern id="im-camion" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:image xlink:href="pompier/camion.png" width="1" height="1" />
+    </svg:pattern>
+    <svg:pattern id="im-maison" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:image xlink:href="pompier/maison.png" width="1" height="1" />
+    </svg:pattern>
+    <svg:pattern id="im-lac-reachable" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:rect x="0" y="0" width="1" height="1" fill="url(#im-lac)"/>
+      <svg:rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.4)"/>
+    </svg:pattern>
+    <svg:pattern id="im-epuration-reachable" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:rect x="0" y="0" width="1" height="1" fill="url(#im-epuration)"/>
+      <svg:rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.4)"/>
+    </svg:pattern>
+    <svg:pattern id="im-caserne-reachable" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:rect x="0" y="0" width="1" height="1" fill="url(#im-caserne)"/>
+      <svg:rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.4)"/>
+    </svg:pattern>
+    <svg:pattern id="im-borne-reachable" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:rect x="0" y="0" width="1" height="1" fill="url(#im-borne)"/>
+      <svg:rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.4)"/>
+    </svg:pattern>
+    <svg:pattern id="im-camion-reachable" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:rect x="0" y="0" width="1" height="1" fill="url(#im-camion)"/>
+      <svg:rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.4)"/>
+    </svg:pattern>
+    <svg:pattern id="im-maison-reachable" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <svg:rect x="0" y="0" width="1" height="1" fill="url(#im-maison)"/>
+      <svg:rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.4)"/>
+    </svg:pattern>
+</svg>
+
+</graph>

@@ -1,0 +1,160 @@
+﻿@charset "utf-8";
+@namespace "http://www.w3.org/1999/xhtml";
+@namespace svg "http://www.w3.org/2000/svg";
+
+@font-face {
+	font-family: "Source Sans Pro";
+	src: url(SourceSansPro-Regular.woff);
+}
+
+@font-face {
+	font-family: "Source Sans Pro";
+	font-weight: bold;
+	src: url(SourceSansPro-Bold.woff);
+}
+
+@font-face {
+	font-family: "Source Sans Pro";
+	font-style: italic;
+	src: url(SourceSansPro-It.woff);
+}
+
+@font-face {
+	font-family: "Source Sans Pro";
+	font-style: italic;
+	font-weight: bold;
+	src: url(SourceSansPro-BoldIt.woff);
+}
+
+body {
+	font-family: "Source Sans Pro", sans-serif;
+}
+
+h1 {
+	margin: 0.3em 0em;
+}
+
+address {
+	font-size: smaller;
+}
+
+#panel {
+	display: none;
+	position: fixed;
+	margin: 0px;
+	left: -webkit-calc(50% - 20em);
+	left: calc(50% - 20em);
+	width: 40em;
+	top: 0px;
+	height: 10em;
+	background-color: rgba(0%, 0%, 0%, 0.8);
+	border-radius: 0px 0px 3em 3em;
+	box-shadow: 0px 0px 1em black;
+	color: white;
+}
+
+#par-graph {
+	position: absolute;
+	left: 3em;
+	top: 1em;
+	width: 17em;
+}
+
+#par-algo {
+	position: absolute;
+	left: 20em;
+	top: 1em;
+	width: 17em;
+}
+
+#par-close {
+	position: absolute;
+	right: 3em;
+	top: 6em;
+	width: 17em;
+	text-align: right;
+}
+
+#sel-graph, #sel-algo {
+	width: 12em;
+}
+
+#btn-param, #btn-start, #btn-close {
+	width: 10em;
+}
+
+#sp-info {
+	display: inline-block;
+	margin-left: 2em;
+}
+
+svg|*.node {
+	fill: none;
+	stroke: black;
+	stroke-width: 1px;
+}
+
+svg|*.node.state-reachable {
+	fill: gray;
+}
+
+svg|*.edge {
+	fill: none;
+	stroke: black;
+	stroke-width: 1px;
+}
+
+svg|*.arrow-start, svg|*.arrow-end {
+	stroke: none;
+	fill: none;
+}
+
+svg|*.edge.capa-positive > svg|*.arrow-end {
+	fill: black;
+}
+
+svg|*.edge.capa-negative > svg|*.arrow-start {
+	fill: black;
+}
+
+svg|*.gauge-bg {
+	stroke: none;
+}
+
+svg|*.gauge-rect {
+	fill: none;
+	stroke-linecap: square;
+}
+
+svg|*.gauge {
+	fill: dodgerblue;
+	stroke: none;
+}
+
+svg|*.gauge-adj {
+	fill: none;
+	stroke: none;
+}
+
+svg|*.edge.adj-positive:not(.used-negative) > svg|*.gauge-adj,
+svg|*.edge.adj-negative:not(.used-positive) > svg|*.gauge-adj {
+	fill: lime;
+}
+
+svg|*.edge.adj-negative.used-positive > svg|*.gauge-adj,
+svg|*.edge.adj-positive.used-negative > svg|*.gauge-adj {
+	fill: magenta;
+}
+
+svg|*.edge.state-active {
+	stroke: red;
+	stroke-width: 2px;
+}
+
+svg|*.edge.state-active.adj-positive > svg|*.arrow-end {
+	fill: red;
+}
+
+svg|*.edge.state-active.adj-negative > svg|*.arrow-start {
+	fill: red;
+}

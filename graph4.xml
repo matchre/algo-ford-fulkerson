@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Auteur: L. Fourquaux -->
+<graph width="800" height="600" node-radius="16" gauge-width="10">
+<node id="start" x="150" y="300"/>
+<node id="a" x="400" y="150"/>
+<node id="b" x="400" y="450"/>
+<node id="end" x="650" y="300"/>
+<edge id="sa" s="start" t="a" c="100"/>
+<edge id="sb" s="start" t="b" c="100"/>
+<edge id="ae" s="a" t="end" c="100"/>
+<edge id="be" s="b" t="end" c="100"/>
+<edge id="ab" s="a" t="b" c="5"/>
+<custom-search name="Parcours choisi"><![CDATA[
+function(ns, ne, opts) {
+	var sa, ab;
+	sa = this.edges["sa"];
+	ab = this.edges["ab"];
+	if (ab.used > 0) {
+		opts.found([rgraph.edge(ns, this.edges["sb"]),
+		            rgraph.edge(ab.end, ab),
+		            rgraph.edge(ab.start, this.edges["ae"])]);
+	} else if (sa.used < sa.high_mark) {
+		opts.found([rgraph.edge(ns, sa),
+		            rgraph.edge(ab.start, ab),
+		            rgraph.edge(ab.end, this.edges["be"])]);
+	} else {
+		opts.unreachable([ns]);
+	}
+}
+]]></custom-search>
+</graph>

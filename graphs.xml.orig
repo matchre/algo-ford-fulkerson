@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<graphs xml:lang="fr-FR">
+<graph name="" desc="g.xml"/>
+<graph name="De Lyon a Paris" desc="villes/graph-villes.xml"/>
+<graph name="Au feu les pompiers" desc="pompier/graph-fireman.xml"/>
+<graph name="De Lyon a Brest et Toulouse" desc="villes/graph-villes-2.xml"/>
+<graph name="Grille" desc="graph-grid.xml"/>
+<graph name="L'interet de choisir les bons chemins" desc="graph4.xml"/>
+<!--
+<graph name="Un graphe qui n'en finit pas" desc="graph1.xml"/>
+<graph name="Graphe 2" desc="graph2.xml"/>
+<graph name="Graphe 3" desc="graph3.xml"/>
+<graph name="Graphe 5" desc="graph5.xml"/>
+-->
+</graphs>

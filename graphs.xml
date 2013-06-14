@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<graphs xml:lang="fr-FR">
+<graph name="De Lyon à Paris" desc="villes/graph-villes.xml"/>
+<graph name="Au feu les pompiers" desc="pompier/graph-fireman.xml"/>
+<graph name="De Lyon à Brest et Toulouse" desc="villes/graph-villes-2.xml"/>
+<graph name="Grille" desc="graph-grid.xml"/>
+<graph name="L’interet de choisir les bons chemins" desc="graph4.xml"/>
+</graphs>

@@ -1,0 +1,16 @@
+{
+  "name": "zero",
+  "version": "0.2.0",
+  "dependencies": {
+    "q": "0.9.3",
+    "q-io": "1.6.5",
+    "rsyncwrapper": "0.0.13"
+  },
+  "devDependencies": {
+    "grunt-jslint": "~0.2.5",
+    "grunt": "~0.4.1"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  }
+}

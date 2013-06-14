@@ -1,0 +1,42 @@
+{
+    "name": "Démonstration de l'algorithme de Ford-Fulkerson",
+    "width": "800px",
+    "height": "760px",
+    "link": "http://images.math.cnrs.fr/---à venir---",
+      "comment": "Démonstration de l'algorithme de Ford-Fulkerson",
+    "links": [
+        {
+            "title": "Document qui document ce grain",
+            "uri": "http://images.math.cnrs.fr/---à venir---"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Caruso, Xavier",
+            "role": "auteur",
+	    "mail" : "xavier.caruso@normalesup.org",
+	    "uri" : "http://perso.univ-rennes1.fr/xavier.caruso",
+            "comment": "version HTLM5/JS"
+	      },
+         {
+            "name": "Fourquaux, Lionel",
+            "role": "auteur",
+	    "mail" : "lionel.fourquaux@normalesup.org",
+	    "uri" : "http://www.normalesup.org/~fourquau/pro",
+            "comment": "version HTLM5/JS"
+        }
+    ],
+    "licenses": [
+        {
+            "name": "CC BY-NC-SA",
+            "uri": "http://creativecommons.org/licenses/by-nc-sa/3.0/fr",
+            "comment": "s'applique aux documents"
+        },
+        {
+            "name": "CeCILL-C",
+            "uri": "http://www.cecill.info/licences/Licence_CeCILL-C_V1-fr.html",
+            "comment": "s'applique au code source"
+        }
+    ]
+}
+}

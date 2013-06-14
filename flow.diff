@@ -1,0 +1,276 @@
+diff -Nurd flow.xavier/bg3.svg flow/bg3.svg
+--- flow.xavier/bg3.svg	2013-04-28 15:15:22.000000000 +0200
++++ flow/bg3.svg	1970-01-01 01:00:00.000000000 +0100
+@@ -1,12 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+-<svg xmlns="http://www.w3.org/2000/svg" width="800px" height="600px">
+-<defs>
+-<linearGradient id="grad" x1="0%" y1="100%" x2="100%" y2="0%">
+-<stop offset="0%" stop-color="blue"/>
+-<stop offset="30%" stop-color="white"/>
+-<stop offset="70%" stop-color="white"/>
+-<stop offset="100%" stop-color="blue"/>
+-</linearGradient>
+-</defs>
+-<rect x="0%" y ="0%" width="100%" height="100%" fill="url(#grad)"/>
+-</svg>
+diff -Nurd flow.xavier/graph.js flow/graph.js
+--- flow.xavier/graph.js	2013-06-09 09:17:29.000000000 +0200
++++ flow/graph.js	2013-06-10 00:11:32.819062300 +0200
+@@ -288,10 +288,10 @@
+ 								setArrow(dom_AS, pos.arrow_before);
+ 								setArc(dom_LE, pos.arc_after);
+ 								setArrow(dom_AE, pos.arrow_after);
+-								setDoubleRect(dom_BG, pos.gauge_rect);
++								setRect(dom_BG, pos.gauge_bg);
++								setDoubleRect(dom_RC, pos.gauge_rect);
+ 								setRect(dom_RU, pos.gauge_used);
+ 								setRect(dom_RA, pos.gauge_adj);
+-								setDoubleRect(dom_RC, pos.gauge_rect);
+ 								if (pos.arc_len >= 0.7 * arr_length) {
+ 									dom_LS.style.visibility = "visible";
+ 									dom_AS.style.visibility = "visible";
+@@ -335,12 +335,12 @@
+ 								if (Math.abs(s = y.dot(da)) > 0.1) {
+ 									ca = a.add(da.mul(y.dot(m.sub(a)) / s));
+ 								} else {
+-									ca = m.add(a.add(da.mul(dl))).mul(0.5);
++									ca = m.add(a).mul(0.5);
+ 								}
+ 								if (Math.abs(s = y.dot(db)) > 0.1) {
+ 									cb = b.add(db.mul(y.dot(mu.sub(b)) / s));
+ 								} else {
+-									cb = mu.add(b.add(db.mul(dl))).mul(0.5);
++									cb = mu.add(b).mul(0.5);
+ 								}
+ 								da = da.mul(arr_length);
+ 								db = db.mul(arr_length);
+@@ -352,6 +352,7 @@
+ 									                p1: a.add(da.rotate(-arr_angle)) },
+ 									arrow_after: { t: b, p0: b.add(db.rotate(arr_angle)),
+ 									               p1: b.add(db.rotate(-arr_angle)) },
++									gauge_bg: { b: rb.add(u_low), u: u, v: v },
+ 									gauge_rect: { b: rb, u0: x.mul(gauge_length_ratio * high), u1: u_low, v: v },
+ 									gauge_used: { b: rb, u: u_used, v: v },
+ 									gauge_adj: { b: rb.add(u_used), u: x.mul(gauge_length_ratio * adj), v: v }
+@@ -370,15 +371,15 @@
+ 							initArrow(dom_AS);
+ 							initArc(dom_LE);
+ 							initArrow(dom_AE);
+-							initDoubleRect(dom_BG);
++							initRect(dom_BG);
+ 							initDoubleRect(dom_RC);
+ 							initRect(dom_RU);
+ 							initRect(dom_RA);
++							dom.appendChild(dom_BG);
+ 							dom.appendChild(dom_LS);
+ 							dom.appendChild(dom_LE);
+ 							dom.appendChild(dom_AS);
+ 							dom.appendChild(dom_AE);
+-							dom.appendChild(dom_BG);
+ 							dom.appendChild(dom_RU);
+ 							dom.appendChild(dom_RA);
+ 							dom.appendChild(dom_RC);
+diff -Nurd flow.xavier/graph1.xml flow/graph1.xml
+--- flow.xavier/graph1.xml	2013-05-25 11:42:48.000000000 +0200
++++ flow/graph1.xml	1970-01-01 01:00:00.000000000 +0100
+@@ -1,21 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+-<graph width="800" height="600">
+-<node id="a" x="100" y="300"/>
+-<node id="b" x="300" y="300"/>
+-<node id="c" x="500" y="300"/>
+-<node id="d" x="700" y="300"/>
+-<node id="start" x="400" y="100"/>
+-<node id="end" x="400" y="500"/>
+-<edge s="start" t="a" c="120"/>
+-<edge s="start" t="b" c="120"/>
+-<edge s="start" t="d" c="120"/>
+-<edge s="a" t="end" c="120"/>
+-<edge s="b" t="a" c="60"/>
+-<edge s="b" t="c" c="37"/>
+-<edge s="c" t="end" c="120"/>
+-<edge s="d" t="c" c="60"/>
+-<edge s="d" t="end" c="120"/>
+-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+-<svg:image width="100%" height="100%" preserveAspectRatio="none" xlink:href="bg3.svg"/>
+-</svg>
+-</graph>
+diff -Nurd flow.xavier/graph2.xml flow/graph2.xml
+--- flow.xavier/graph2.xml	2013-03-27 02:05:28.000000000 +0100
++++ flow/graph2.xml	1970-01-01 01:00:00.000000000 +0100
+@@ -1,17 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+-<graph width="800" height="600" node-radius="16" gauge-width="10">
+-<node id="start" x="100" y="300"/>
+-<node id="a" x="300" y="200"/>
+-<node id="b" x="300" y="400"/>
+-<node id="c" x="500" y="200"/>
+-<node id="d" x="500" y="400"/>
+-<node id="end" x="700" y="300"/>
+-<edge s="start" t="a" c="100"/>
+-<edge s="start" t="b" c="40"/>
+-<edge s="a" t="b" c="40"/>
+-<edge s="a" t="c" c="60"/>
+-<edge s="b" t="d" c="80"/>
+-<edge s="c" t="d" c="20"/>
+-<edge s="c" t="end" c="40"/>
+-<edge s="d" t="end" c="100"/>
+-</graph>
+diff -Nurd flow.xavier/graph3.xml flow/graph3.xml
+--- flow.xavier/graph3.xml	2013-03-27 02:13:42.000000000 +0100
++++ flow/graph3.xml	1970-01-01 01:00:00.000000000 +0100
+@@ -1,21 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+-<graph width="800" height="600" node-radius="16" gauge-width="10">
+-<node id="start" x="100" y="200"/>
+-<node id="b" x="100" y="400"/>
+-<node id="c" x="300" y="300"/>
+-<node id="d" x="500" y="200"/>
+-<node id="e" x="500" y="400"/>
+-<node id="f" x="700" y="200"/>
+-<node id="end" x="700" y="400"/>
+-<edge s="start" t="b" c="30"/>
+-<edge s="start" t="d" c="30"/>
+-<edge s="b" t="c" c="40"/>
+-<edge s="c" t="start" c="30"/>
+-<edge s="c" t="d" c="10"/>
+-<edge s="c" t="e" c="20"/>
+-<edge s="d" t="f" c="60"/>
+-<edge s="d" t="e" c="20"/>
+-<edge s="e" t="b" c="10"/>
+-<edge s="e" t="end" c="10"/>
+-<edge s="f" t="end" c="90"/>
+-</graph>
+diff -Nurd flow.xavier/graph4.xml flow/graph4.xml
+--- flow.xavier/graph4.xml	2013-05-18 19:58:16.000000000 +0200
++++ flow/graph4.xml	2013-06-10 00:22:05.322173200 +0200
+@@ -1,4 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
++<!-- Auteur: L. Fourquaux -->
+ <graph width="800" height="600" node-radius="16" gauge-width="10">
+ <node id="start" x="150" y="300"/>
+ <node id="a" x="400" y="150"/>
+diff -Nurd flow.xavier/graph5.xml flow/graph5.xml
+--- flow.xavier/graph5.xml	2013-05-25 12:10:40.000000000 +0200
++++ flow/graph5.xml	1970-01-01 01:00:00.000000000 +0100
+@@ -1,23 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+-<graph width="400" height="300" node-radius="16" gauge-width="10" start="a" end="b">
+-<node id="a" x="50" y="200"/>
+-<node id="b" x="350" y="200"/>
+-<edge s="a" t="b" c="120" start-angle="30" end-angle="-30"/>
+-<edge s="b" t="a" c="60" rev="60" start-angle="30" end-angle="-30"/>
+-<stylesheet><![CDATA[
+-.start { stroke: blue; }
+-.end { stroke: lime; }
+-#g-a:not(.state-reachable) { fill: url(#pat0); }
+-#g-a.state-reachable { fill: url(#pat1); }
+-]]></stylesheet>
+-<svg xmlns:svg="http://www.w3.org/2000/svg">
+-<svg:pattern id="pat0" patternUnits="userSpaceOnUse" width="8" height="8">
+-<svg:line x1="0" y1="4" x2="4" y2="0" stroke-linecap="square" stroke="orange"/>
+-<svg:line x1="4" y1="8" x2="8" y2="4" stroke-linecap="square" stroke="orange"/>
+-</svg:pattern>
+-<svg:pattern id="pat1" patternUnits="userSpaceOnUse" width="8" height="8">
+-<svg:rect x="0" y="0" width="8" height="8" fill="gray"/>
+-<svg:rect x="0" y="0" width="8" height="8" fill="url(#pat0)"/>
+-</svg:pattern>
+-</svg>
+-</graph>
+diff -Nurd flow.xavier/graph-grid.xml flow/graph-grid.xml
+--- flow.xavier/graph-grid.xml	2013-06-08 20:36:42.000000000 +0200
++++ flow/graph-grid.xml	2013-06-10 00:21:46.321339800 +0200
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+-
++<!-- Auteur: X. Caruso -->
+ <graph width="800" height="600" node-radius="10" gauge-width="8">
+ <node id="start" x="-4900" y="-4900"/>
+ <node id="end" x="5700" y="5500"/>
+diff -Nurd flow.xavier/graphs.xml flow/graphs.xml
+--- flow.xavier/graphs.xml	2013-06-09 09:19:37.000000000 +0200
++++ flow/graphs.xml	2013-06-09 23:19:07.959738500 +0200
+@@ -1,14 +1,8 @@
+ ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+ <graphs xml:lang="fr-FR">
+-<graph name="De Lyon a Paris" desc="villes/graph-villes.xml"/>
++<graph name="De Lyon à Paris" desc="villes/graph-villes.xml"/>
+ <graph name="Au feu les pompiers" desc="pompier/graph-fireman.xml"/>
+-<graph name="De Lyon a Brest et Toulouse" desc="villes/graph-villes-2.xml"/>
++<graph name="De Lyon à Brest et Toulouse" desc="villes/graph-villes-2.xml"/>
+ <graph name="Grille" desc="graph-grid.xml"/>
+-<graph name="L'interet de choisir les bons chemins" desc="graph4.xml"/>
+-<!--
+-<graph name="Un graphe qui n'en finit pas" desc="graph1.xml"/>
+-<graph name="Graphe 2" desc="graph2.xml"/>
+-<graph name="Graphe 3" desc="graph3.xml"/>
+-<graph name="Graphe 5" desc="graph5.xml"/>
+--->
++<graph name="L’interet de choisir les bons chemins" desc="graph4.xml"/>
+ </graphs>
+diff -Nurd flow.xavier/index.xhtml flow/index.xhtml
+--- flow.xavier/index.xhtml	2013-06-07 11:38:11.000000000 +0200
++++ flow/index.xhtml	2013-06-09 22:48:12.086878800 +0200
+@@ -4,7 +4,7 @@
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       xmlns:svg="http://www.w3.org/2000/svg">
+ <head>
+-<title>Algorithme de Ford-Fulkerson</title>
++<title>L’algorithme de Ford-Fulkerson</title>
+ <link rel="author" href="http://www.normalesup.org/~fourquau/pro/"/>
+ <link rel="stylesheet" type="text/css" href="style.css"/>
+ <script type="application/ecmascript" src="geom.js"/>
+@@ -16,7 +16,7 @@
+ <script type="application/ecmascript" src="ui.js"/>
+ </head>
+ <body>
+-<h1>L'algorithme de Ford-Fulkerson</h1>
++<h1>L’algorithme de Ford-Fulkerson</h1>
+ <address><a href="http://perso.univ-rennes1.fr/xavier.caruso/">Xavier Caruso</a>
+ &amp; <a href="http://www.normalesup.org/~fourquau/pro/">Lionel Fourquaux</a></address>
+ <div id="control">
+diff -Nurd flow.xavier/pompier/graph-fireman.xml flow/pompier/graph-fireman.xml
+--- flow.xavier/pompier/graph-fireman.xml	2013-06-07 08:01:57.000000000 +0200
++++ flow/pompier/graph-fireman.xml	2013-06-10 00:22:29.798616200 +0200
+@@ -1,4 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
++<!-- Auteur: X. Caruso -->
+ <graph width="800" height="600" node-radius="75" start="lac" end="maison" gauge-width="10">
+ 
+ <node id="lac" x="91" y="502"/>
+diff -Nurd flow.xavier/style.css flow/style.css
+--- flow.xavier/style.css	2013-05-25 02:03:00.000000000 +0200
++++ flow/style.css	2013-06-10 00:30:00.219207400 +0200
+@@ -117,7 +117,12 @@
+ 	fill: black;
+ }
+ 
++svg|*.gauge-bg {
++	stroke: none;
++}
++
+ svg|*.gauge-rect {
++	fill: none;
+ 	stroke-linecap: square;
+ }
+ 
+Binary files flow.xavier/villes/france.jpg and flow/villes/france.jpg differ
+diff -Nurd flow.xavier/villes/graph-villes.xml flow/villes/graph-villes.xml
+--- flow.xavier/villes/graph-villes.xml	2013-06-09 09:29:46.000000000 +0200
++++ flow/villes/graph-villes.xml	2013-06-10 00:22:49.673051100 +0200
+@@ -1,4 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
++<!-- Auteur: X. Caruso -->
+ <graph width="700" height="600" node-radius="5" start="lyon" end="paris" gauge-width="9"> <!-- info="villes/info.html"-->
+ 
+ <node id="paris" x="400" y="165"/>
+diff -Nurd flow.xavier/villes/graph-villes-2.xml flow/villes/graph-villes-2.xml
+--- flow.xavier/villes/graph-villes-2.xml	2013-06-09 09:18:04.000000000 +0200
++++ flow/villes/graph-villes-2.xml	2013-06-10 00:23:10.670688000 +0200
+@@ -1,4 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
++<!-- Auteur: X. Caruso -->
+ <graph width="700" height="600" node-radius="5" start="lyon" end="puits" gauge-width="9">
+ 
+ <node id="paris" x="400" y="165"/>

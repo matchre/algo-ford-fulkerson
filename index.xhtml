@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<html xml:lang="fr-FR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg">
+<head>
+<title>L’algorithme de Ford-Fulkerson</title>
+<link rel="author" href="http://www.normalesup.org/~fourquau/pro/"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script type="application/ecmascript" src="geom.js"/>
+<script type="application/ecmascript" src="graph.js"/>
+<script type="application/ecmascript" src="rgraph.js"/>
+<script type="application/ecmascript" src="xmldsc.js"/>
+<script type="application/ecmascript" src="search.js"/>
+<script type="application/ecmascript" src="maxflow.js"/>
+<script type="application/ecmascript" src="ui.js"/>
+</head>
+<body><div align="center">
+<h1>L’algorithme de Ford-Fulkerson</h1>
+<address><a href="http://perso.univ-rennes1.fr/xavier.caruso/">Xavier Caruso</a>
+&amp; <a href="http://www.normalesup.org/~fourquau/pro/">Lionel Fourquaux</a></address>
+<div id="control">
+<p><input type="button" id="btn-param" value="Paramètres"/>
+<input type="button" id="btn-start" value="Résoudre" disabled="disabled"/>
+<span id="sp-info"></span></p>
+</div>
+<div id="panel">
+<p id="par-graph">Graphe : <select id="sel-graph"/></p>
+<p id="par-algo">Parcours : <select id="sel-algo"/></p>
+<p id="par-close"><input type="button" id="btn-close" value="Fermer"/></p>
+</div>
+<svg:svg id="graph" width="0" height="0" version="1.1"/>
+</div></body>
+</html>
