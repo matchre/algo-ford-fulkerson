@@ -14,15 +14,15 @@
         {
             "name": "Caruso, Xavier",
             "role": "auteur",
-	    "mail" : "xavier.caruso@normalesup.org",
-	    "uri" : "http://perso.univ-rennes1.fr/xavier.caruso",
+            "mail" : "xavier.caruso@normalesup.org",
+            "uri" : "http://perso.univ-rennes1.fr/xavier.caruso",
             "comment": "version HTLM5/JS"
-	      },
+       },
          {
             "name": "Fourquaux, Lionel",
             "role": "auteur",
-	    "mail" : "lionel.fourquaux@normalesup.org",
-	    "uri" : "http://www.normalesup.org/~fourquau/pro",
+            "mail" : "lionel.fourquaux@normalesup.org",
+            "uri" : "http://www.normalesup.org/~fourquau/pro",
             "comment": "version HTLM5/JS"
         }
     ],
