@@ -1,5 +1,5 @@
 {
-  "name": "zero",
+  "name": "algo-ford-fulkerson",
   "version": "0.1.0",
   "devDependencies": {
     "grunt-jslint": "~0.2.5",
